@@ -1,4 +1,7 @@
 struct Vec3
+  alias Point3 = Vec3
+  alias Color = Vec3
+
   getter x, y, z
 
   def initialize
@@ -42,8 +45,23 @@ struct Vec3
     x*x + y*y + z*z
   end
 
-  alias Point3 = Vec3
-  alias Color = Vec3
+  # 内積
+  def dot(other : self)
+    x*other.x + y*other.y + z*other.z
+  end
+
+  # 外積
+  def cross(other : self)
+    Vec3.new(
+      y*other.z - z*other.y,
+      z*other.x - x*other.z,
+      x*other.y - y*other.x
+    )
+  end
+
+  def unit_vector
+    self / self.length
+  end
 end
 
 class RayTracing
