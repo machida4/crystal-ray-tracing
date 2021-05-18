@@ -1,4 +1,51 @@
-# TODO: Write documentation for `Crystal::Ray::Tracing`
+struct Vec3
+  getter x, y, z
+
+  def initialize
+    initialize(0.0, 0.0, 0.0)
+  end
+
+  def initialize(
+    @x : Float64,
+    @y : Float64,
+    @z : Float64
+  )
+  end
+
+  # 単項演算子
+  def -
+    Vec3.new(-x, -y, -z)
+  end
+
+  # 二項演算子
+  def +(other : self)
+    Vec3.new(x + other.x, y + other.y, z + other.z)
+  end
+
+  def -(other : self)
+    Vec3.new(x - other.x, y - other.y, z - other.z)
+  end
+
+  def *(t : Float64)
+    Vec3.new(x * t, y * t, z * t)
+  end
+
+  def /(t : Float64)
+    self * (1 / t)
+  end
+
+  def length
+    sqrt(length_squared)
+  end
+
+  def length_squared
+    x*x + y*y + z*z
+  end
+
+  alias Point3 = Vec3
+  alias Color = Vec3
+end
+
 class RayTracing
   VERSION = "0.1.0"
 
