@@ -1,0 +1,13 @@
+name: crystal-ray-tracing
+version: 0.1.0
+
+authors:
+  - machida <machida@kmc.gr.jp>
+
+targets:
+  crystal-ray-tracing:
+    main: src/crystal-ray-tracing.cr
+
+crystal: 1.0.0
+
+license: MIT
