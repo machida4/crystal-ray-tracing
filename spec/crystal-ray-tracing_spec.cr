@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Crystal::Ray::Tracing do
+describe Crystal::RayTracing do
   # TODO: Write tests
 
   it "works" do
