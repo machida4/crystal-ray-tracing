@@ -16,6 +16,7 @@ class RayTracing
     f.print("P3", "\n", IMAGE_WIDTH, " ", IMAGE_HEIGHT, "\n255\n")
 
     (IMAGE_WIDTH - 1).downto(0) do |j|
+      print_progression(j)
       0.upto(IMAGE_HEIGHT - 1) do |i|
         r = i / (IMAGE_WIDTH - 1)
         g = j / (IMAGE_HEIGHT - 1)
@@ -30,6 +31,12 @@ class RayTracing
     end
 
     f.close
+    print "\n", "Done.", "\n"
+  end
+
+  def self.print_progression(remaining : Int)
+    print "\r", "Scanlines remaining: ", remaining
+    STDOUT.flush
   end
 end
 
