@@ -1,6 +1,4 @@
 struct Vec3
-  alias Point3 = Vec3
-  alias Color = Vec3
 
   getter x, y, z
 
@@ -62,12 +60,17 @@ struct Vec3
   def unit_vector
     self / self.length
   end
+
+  def write_color
+    "#{(255.999 * x).to_i.to_s} #{(255.999 * y).to_i.to_s} #{(255.999 * z).to_i.to_s}\n"
+  end
 end
+
+alias Point3 = Vec3
+alias Color = Vec3
 
 class RayTracing
   VERSION = "0.1.0"
-
-  # TODO: Put your code here
 
   IMAGE_WIDTH  = 256
   IMAGE_HEIGHT = 256
@@ -87,11 +90,8 @@ class RayTracing
         g = j / (IMAGE_HEIGHT - 1)
         b = 0.25
 
-        ir = (255.999 * r).to_i
-        ig = (255.999 * g).to_i
-        ib = (255.999 * b).to_i
-
-        f.print(ir, " ", ig, " ", ib, "\n")
+        pixel_color = Color.new(r, g, b)
+        f.print(pixel_color.write_color)
       end
     end
 
