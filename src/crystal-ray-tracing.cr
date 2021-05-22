@@ -16,9 +16,10 @@ class RayTracing
   end
 
   def self.ray_color(ray : Ray)
+    # レイの方向ベクトルを正規化
     unit_direction = ray.direction.unit_vector
+    # 方向ベクトルのy成分を使って白と青を線形に混ぜ合わせレイの色とする
     t = 0.5 * (unit_direction.y + 1.0)
-
     Color.new(1.0, 1.0, 1.0) * (1.0 - t) + Color.new(0.5, 0.7, 1.0) * t
   end
 
