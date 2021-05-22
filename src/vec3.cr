@@ -35,7 +35,7 @@ struct Vec3
   end
 
   def length
-    sqrt(length_squared)
+    Math.sqrt(length_squared)
   end
 
   def length_squared
