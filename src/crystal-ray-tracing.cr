@@ -1,5 +1,4 @@
 struct Vec3
-
   getter x, y, z
 
   def initialize
@@ -68,6 +67,20 @@ end
 
 alias Point3 = Vec3
 alias Color = Vec3
+
+class Ray
+  getter origin, direction
+
+  def initialize(
+    @origin : Point3,
+    @direction : Vec3
+  )
+  end
+
+  def at(t : Float64)
+    @origin + t * @direction
+  end
+end
 
 class RayTracing
   VERSION = "0.1.0"
