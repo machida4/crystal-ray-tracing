@@ -47,6 +47,10 @@ struct Vec3
     x*other.x + y*other.y + z*other.z
   end
 
+  def self.dot(one : self, other : self)
+    one.x*other.x + one.y*other.y + one.z*other.z
+  end
+
   # 外積
   def cross(other : self)
     Vec3.new(
