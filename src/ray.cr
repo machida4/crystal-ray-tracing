@@ -8,6 +8,6 @@ class Ray
   end
 
   def at(t : Float64)
-    @origin + t * @direction
+    @origin + @direction * t
   end
 end

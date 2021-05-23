@@ -17,6 +17,12 @@ class RayTracing
   end
 
   def self.ray_color(ray : Ray)
+    sphere = Sphere.new(Point3.new(0, 0, -1), 0.5)
+    hit?, hit_record = sphere.hit?(ray, ..Float64::INFINITY)
+    if (hit?)
+      return Color.new(1.0, 0.0, 0.0)
+    end
+
     # レイの方向ベクトルを正規化
     unit_direction = ray.direction.unit_vector
     # 方向ベクトルのy成分を使って白と青を線形に混ぜ合わせレイの色とする
@@ -36,10 +42,11 @@ class RayTracing
     (IMAGE_WIDTH - 1).downto(0) do |j|
       print_progression(j)
       0.upto(IMAGE_HEIGHT - 1) do |i|
-        u = i.to_f64 / (IMAGE_WIDTH - 1)
-        v = j.to_f64 / (IMAGE_HEIGHT - 1)
+        pp j, i
+        u = (i.to_f64 / (IMAGE_WIDTH - 1)).to_i
+        v = (j.to_f64 / (IMAGE_HEIGHT - 1)).to_i
 
-        ray = Ray.new(origin, lower_left_corner + horizontal*u + vertical*v - origin)
+        ray = Ray.new(origin, lower_left_corner + horizontal*u.to_f64 + vertical*v.to_f64 - origin)
         pixel_color = ray_color(ray)
         f.print(pixel_color.write_color)
       end

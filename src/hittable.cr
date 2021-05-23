@@ -15,18 +15,18 @@ end
 abstract class Hittable
   getter center, radius
 
-  def initialize(@center : Point3, @radius : Float64)
-  end
-
   abstract def hit?(ray : Ray, t_range : Range)
 end
 
 class Sphere < Hittable
+  def initialize(@center : Point3, @radius : Float64)
+  end
+
   def hit?(ray : Ray, t_range : Range) : {Bool, HitRecord}
     # 二次方程式の解の個数で衝突判定
     oc = ray.origin - center
     a = ray.direction.length_squared
-    half_b = oc.dot(r.direction)
+    half_b = oc.dot(ray.direction)
     c = oc.length_squared - radius*radius
     # 判別式
     discriminant = half_b*half_b - a*c
@@ -36,7 +36,7 @@ class Sphere < Hittable
     end
 
     # 解が存在する場合は解がt_rangeの範囲内かチェックする
-    root = sqrt(discriminant)
+    root = Math.sqrt(discriminant)
 
     temp_t = (-half_b - root) / a
     if (t_range.covers?(temp_t))
