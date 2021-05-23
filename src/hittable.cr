@@ -3,8 +3,13 @@ require "./ray.cr"
 struct HitRecord
   getter point, normal, t, is_hit 
 
+  def self.plane
+    HitRecord.new(Point3.new(0, 0, 0), Vec3.new(0, 0, 0), 0)
+  end
+
   def initialize(@point : Point3, @normal : Vec3, @t : Float64)
   end
+
 end
 
 abstract class Hittable
@@ -27,7 +32,7 @@ class Sphere < Hittable
     discriminant = half_b*half_b - a*c
 
     if (discriminant < 0)
-      return false, HitRecord.new(Point3.new(0, 0, 0), Vec3.new(0, 0, 0), 0)
+      return false, HitRecord.plane
     end
 
     # 解が存在する場合は解がt_rangeの範囲内かチェックする
@@ -47,6 +52,6 @@ class Sphere < Hittable
       return true, HitRecord.new(point, normal, temp_t)
     end
 
-    return false, HitRecord.new(Point3.new(0, 0, 0), Vec3.new(0, 0, 0), 0)
+    return false, HitRecord.plane
   end
 end
