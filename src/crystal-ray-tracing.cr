@@ -6,7 +6,7 @@ class RayTracing
   VERSION = "0.1.0"
 
   ASPECT_RATIO = 16.0 / 9.0
-  IMAGE_WIDTH  = 384
+  IMAGE_WIDTH  = 400
   IMAGE_HEIGHT = (IMAGE_WIDTH / ASPECT_RATIO).to_i
   VIEWPORT_HEIGHT = 2.0
   VIEWPORT_WIDTH  = ASPECT_RATIO * VIEWPORT_HEIGHT
@@ -39,14 +39,13 @@ class RayTracing
     vertical = Vec3.new(0, VIEWPORT_HEIGHT, 0)
     lower_left_corner = origin - horizontal/2 - vertical/2 - Vec3.new(0, 0, FOCAL_LENGTH)
 
-    (IMAGE_WIDTH - 1).downto(0) do |j|
+    (IMAGE_HEIGHT - 1).downto(0) do |j|
       print_progression(j)
-      0.upto(IMAGE_HEIGHT - 1) do |i|
-        pp j, i
-        u = (i.to_f64 / (IMAGE_WIDTH - 1)).to_i
-        v = (j.to_f64 / (IMAGE_HEIGHT - 1)).to_i
+      0.upto(IMAGE_WIDTH - 1) do |i|
+        u = i.to_f64 / (IMAGE_WIDTH - 1)
+        v = j.to_f64 / (IMAGE_HEIGHT - 1)
 
-        ray = Ray.new(origin, lower_left_corner + horizontal*u.to_f64 + vertical*v.to_f64 - origin)
+        ray = Ray.new(origin, lower_left_corner + horizontal*u + vertical*v - origin)
         pixel_color = ray_color(ray)
         f.print(pixel_color.write_color)
       end

@@ -39,19 +39,16 @@ class Sphere < Hittable
     root = Math.sqrt(discriminant)
 
     temp_t = (-half_b - root) / a
-    if (t_range.covers?(temp_t))
-      point = ray.at(temp_t)
-      normal = (point - center) / radius
-      return true, HitRecord.new(point, normal, temp_t)
+    if (!t_range.covers?(temp_t))
+      temp_t = (-half_b + root) / a
+      if (!t_range.covers?(temp_t))
+        return false, HitRecord.plane
+      end
     end
 
-    temp_t = (-half_b + root) / a
-    if (t_range.covers?(temp_t))
-      point = ray.at(temp_t)
-      normal = (point - center) / radius
-      return true, HitRecord.new(point, normal, temp_t)
-    end
+    point = ray.at(temp_t)
+    normal = (point - center) / radius
 
-    return false, HitRecord.plane
+    return true, HitRecord.new(point, normal, temp_t)
   end
 end
