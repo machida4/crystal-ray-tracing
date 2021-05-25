@@ -1,3 +1,5 @@
+require "./vec3"
+
 class Ray
   getter origin, direction
 

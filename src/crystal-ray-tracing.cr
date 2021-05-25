@@ -1,6 +1,8 @@
 require "./vec3"
 require "./ray"
 require "./hittable"
+require "./sphere"
+require "./hit_record"
 
 class RayTracing
   VERSION = "0.1.0"

@@ -1,11 +1,4 @@
-require "./vec3"
-require "./ray"
-
-abstract class Hittable
-  getter center, radius
-
-  abstract def hit?(ray : Ray, t_range : Range)
-end
+require "./hittable"
 
 class Sphere < Hittable
   def initialize(@center : Point3, @radius : Float64)
