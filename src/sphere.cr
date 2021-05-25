@@ -29,8 +29,10 @@ class Sphere < Hittable
     end
 
     point = ray.at(temp_t)
-    normal = (point - center) / radius
+    hit_record = HitRecord.new(point, temp_t)
+    outward_normal = (point - center) / radius
+    hit_record.set_face_normal(ray, outward_normal)
 
-    return true, HitRecord.new(point, normal, temp_t)
+    return true, hit_record
   end
 end

@@ -22,7 +22,7 @@ class RayTracing
     sphere = Sphere.new(Point3.new(0, 0, -1), 0.5)
     hit?, hit_record = sphere.hit?(ray, ..Float64::INFINITY)
     if (hit?)
-      return Color.new(1.0, 0.0, 0.0)
+      return (hit_record.normal + Color.new(1.0, 1.0, 1.0)) * 0.5
     end
 
     # レイの方向ベクトルを正規化
