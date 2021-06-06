@@ -8,6 +8,10 @@ class HittableList < Hittable
   def initialize(@list : Array(Hittable))
   end
 
+  def initialize
+    @list = [] of Hittable
+  end
+
   def clear
     @list = [] of Hittable
   end
@@ -25,7 +29,7 @@ class HittableList < Hittable
       is_hit, temp_record = object.hit?(ray, (t_range.begin .. closest_so_far))
       if (is_hit)
         hit_anything = true
-        closest_so_far = record.t
+        closest_so_far = temp_record.t
         record = temp_record
       end
     end

@@ -16,7 +16,7 @@ class RayTracing
   FOCAL_LENGTH    = 1.0
 
   def self.ray_color(ray : Ray, world : Hittable)
-    is_hit, record = world.hit?(ray, ..Float64::INFINITY)
+    is_hit, record = world.hit?(ray, 0..Float64::INFINITY)
     if (is_hit)
       return (record.normal + Color.new(1.0, 1.0, 1.0)) * 0.5
     end
@@ -37,7 +37,7 @@ class RayTracing
     # World
     world = HittableList.new
     world.add(Sphere.new(Point3.new(0, 0, -1), 0.5))
-    world.add(Sphere.new(Point3.new(0, -100.5, -1), 100))
+    world.add(Sphere.new(Point3.new(0, -100.5, -1), 100.0))
 
     # Camera
     origin = Point3.new(0, 0, 0)
