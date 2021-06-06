@@ -1,6 +1,8 @@
 require "./hittable"
 
 class Sphere < Hittable
+  getter center, radius
+
   def initialize(@center : Point3, @radius : Float64)
   end
 
