@@ -26,6 +26,7 @@ class HittableList < Hittable
     closest_so_far = t_range.end
 
     @list.each do |object|
+      # TODO: beginやendがあるとは限らない
       is_hit, temp_record = object.hit?(ray, (t_range.begin .. closest_so_far))
       if (is_hit)
         hit_anything = true

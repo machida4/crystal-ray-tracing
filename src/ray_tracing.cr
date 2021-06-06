@@ -4,6 +4,7 @@ require "./hittable"
 require "./hittable_list"
 require "./sphere"
 require "./hit_record"
+require "./camera"
 
 class RayTracing
   VERSION = "0.1.0"
